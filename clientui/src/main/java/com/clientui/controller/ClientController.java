@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.clientui.beans.CommandeBean;
+import com.clientui.beans.ExpeditionBean;
 import com.clientui.beans.PaiementBean;
 import com.clientui.beans.ProductBean;
 import com.clientui.proxies.MicroserviceCommandeProxy;
@@ -127,6 +128,22 @@ public class ClientController {
 
         return "confirmation";
     }
+    
+    
+    /*
+     * voir l'etat de la commande
+     * */
+     @RequestMapping(value = "/suivi/{idCommande}")
+     public String suivreCommande(@PathVariable int idCommande, Model model){
+         // On appel le microservice et (étape 7) on récupère le résultat qui est sous forme ResponseEntity<PaiementBean> ce qui va nous permettre de vérifier le code retour.
+         ResponseEntity<ExpeditionBean> expedition = expeditionProxy.recupererUneExpedition(idCommande);
+
+         //si le code est autre que 201 CREATED, c'est que le paiement n'a pas pu aboutir.
+         if(expedition.getStatusCode() == HttpStatus.OK)
+        	 model.addAttribute("expedition",expedition.getBody()); // on envoi un Boolean paiementOk à la vue
+
+         return "suivi";
+     }
 
     //Génére une serie de 16 chiffres au hasard pour simuler vaguement une CB
     private Long numcarte() {
