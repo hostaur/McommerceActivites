@@ -136,7 +136,7 @@ public class ClientController {
      @RequestMapping(value = "/suivi/{idCommande}")
      public String suivreCommande(@PathVariable int idCommande, Model model){
          // On appel le microservice et (étape 7) on récupère le résultat qui est sous forme ResponseEntity<PaiementBean> ce qui va nous permettre de vérifier le code retour.
-         ResponseEntity<ExpeditionBean> expedition = expeditionProxy.recupererUneExpedition(idCommande);
+         ResponseEntity<ExpeditionBean> expedition = expeditionProxy.etatExpedition(idCommande);
 
          //si le code est autre que 201 CREATED, c'est que le paiement n'a pas pu aboutir.
          if(expedition.getStatusCode() == HttpStatus.OK)

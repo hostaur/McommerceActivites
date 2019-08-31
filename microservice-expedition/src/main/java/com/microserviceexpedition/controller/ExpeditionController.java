@@ -44,7 +44,7 @@ public class ExpeditionController {
     
   //Récuperer une expedition par son id
     @GetMapping( value = "/expeditions/getByIdCommande/{idCommande}")
-    public Expedition recupererUneExpeditionByIdCommande(@PathVariable int idCommande) {
+    public Expedition etatExpedition(@PathVariable int idCommande) {
 
         Expedition Expedition = ExpeditionDao.findByIdCommande(idCommande);
 

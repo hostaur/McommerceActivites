@@ -29,8 +29,8 @@ public class ExpeditionBean {
 	}
 
 	public String getEtat() {
-		return etat;
-	}
+		
+		return etat.equals("0")?"En préparation":etat.equals("1")?"expédiée":"livrée";	}
 
 	public void setEtat(String etat) {
 		this.etat = etat;

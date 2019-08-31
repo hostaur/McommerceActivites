@@ -12,6 +12,6 @@ import com.clientui.beans.ExpeditionBean;
 @RibbonClient(name = "microservice-expedition")
 public interface MicroserviceExpeditionProxy {
     @GetMapping( value = "/microservice-expedition/expeditions/getByIdCommande/{idCommande}")
-    ResponseEntity<ExpeditionBean> recupererUneExpedition(@PathVariable("idCommande") int idCommande);
+    ResponseEntity<ExpeditionBean> etatExpedition(@PathVariable("idCommande") int idCommande);
 
 }
